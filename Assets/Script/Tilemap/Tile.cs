@@ -37,12 +37,15 @@ namespace Roguelike.Tilemaps
         protected static Dictionary<TileType, TileBorderDirectionSprite[]> _sprites = ResourcesManager.LoadTilesData();
         public GameObject gameObject = null;
 
-        protected Vector3Int _position;
+        public Vector3Int position;
         protected TileData _tileData;
 
         public Tile(Vector3Int position, TileData tileData){
             _position = position;
             _tileData = tileData;
+            this.position   = position;
+            _tileData       = tileData;
+        }
         }
 
         public void Generate()
