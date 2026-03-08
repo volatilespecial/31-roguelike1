@@ -19,11 +19,16 @@ namespace Roguelike.Tilemaps
     public class TileData
     {
         public Sprite sprite;
-        public bool selected;
-        public TileData(Sprite sprite, bool selected)
+        public TileType type;
+        public int variation;
+        public TileFlagBorderDirection flag;
+
+        public TileData(Sprite sprite, TileType type, int variation, TileFlagBorderDirection flag = 0)
         {
             this.sprite = sprite;
-            this.selected = selected;
+            this.type = type;
+            this.variation = variation;
+            this.flag = flag; 
         }
     }
 
