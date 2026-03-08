@@ -49,13 +49,13 @@ namespace Roguelike.Tilemaps
         public void Generate()
         {
             if (gameObject) UnityEngine.Object.Destroy(gameObject);
-            gameObject = new GameObject("Tile " + _position.x + " " + _position.y + " " + _position.z);
+            gameObject = new GameObject("Tile " + Coordinate.IsoToChunkLocalPosition(position));
             SpriteRenderer sp = gameObject.AddComponent<SpriteRenderer>();
-            sp.sprite = _tileData.sprite;
+            sp.sprite = Sprite;
+            sp.color = GetTileBrightnessColorFromElevation(position.z);
+            Vector3 pos = Coordinate.IsoToWorld(position);
 
-            Vector3 pos = Coordinate.IsoToWorld(_position);
-
-            sp.sortingOrder = -(_position.x + _position.y) + _position.z * 5;
+            sp.sortingOrder = -(position.x + position.y) + position.z * 5;
             gameObject.transform.position = new Vector3(pos.x, pos.y, 0.0f);
         }
 
@@ -80,6 +80,12 @@ namespace Roguelike.Tilemaps
                 TileType.ROCK           => new Rock(position, variation),
                 _                       => null,
             };
+        }
+
+        public static Color GetTileBrightnessColorFromElevation(float elevation)
+        {
+            float brightness = Mathf.Lerp(0.8f, 1.0f, elevation / Chunk.k_zSize);
+            return new Color(brightness, brightness, brightness);
         }
 
         public Sprite Sprite 
