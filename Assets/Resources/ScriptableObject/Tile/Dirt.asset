@@ -14,4 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TileSpriteData
   type: 2
   sprites:
-  - {fileID: -17208044, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+  - spNSEW: {fileID: -1385827773, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    sp: {fileID: -831704070, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spW: {fileID: 282268602, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spN: {fileID: -824045105, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spS: {fileID: 2101912536, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spE: {fileID: -1994546389, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNW: {fileID: 1614969692, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spSE: {fileID: -679839122, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNE: {fileID: 819349361, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spSW: {fileID: 1571598165, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNS: {fileID: -79468003, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spEW: {fileID: 1972034981, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNSW: {fileID: 1778331038, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spSEW: {fileID: 1394181446, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNSE: {fileID: 817799308, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNEW: {fileID: -969504407, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
