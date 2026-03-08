@@ -34,7 +34,7 @@ namespace Roguelike.Tilemaps
 
     public class Tile
     {
-        protected static Dictionary<TileType, Sprite[]> _sprites = ResourcesManager.LoadTilesData();
+        protected static Dictionary<TileType, TileBorderDirectionSprite[]> _sprites = ResourcesManager.LoadTilesData();
         public GameObject gameObject = null;
 
         protected Vector3Int _position;
