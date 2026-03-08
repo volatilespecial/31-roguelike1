@@ -37,6 +37,20 @@ namespace Roguelike.Utils
             float y = (iso.x + iso.y) * (tileHeight * 0.5f) + iso.z * elevationScale;
             return new Vector3(x, y, iso.z);
         }
+
+        public static Vector3Int IsoToChunk(Vector3Int iso)
+        {
+            return new Vector3Int(Mathf.FloorToInt((float)iso.x / (float)Chunk.k_xSize), 
+                                  Mathf.FloorToInt((float)iso.y / (float)Chunk.k_ySize),
+                                  0);
+        }
+
+        public static Vector3Int IsoToChunkLocalPosition(Vector3Int iso)
+        {
+            int x = Math.Mod(iso.x, Chunk.k_xSize);
+            int y = Math.Mod(iso.y, Chunk.k_ySize);
+            return new Vector3Int(x, y, iso.z);
+        }
     }
 }
 
