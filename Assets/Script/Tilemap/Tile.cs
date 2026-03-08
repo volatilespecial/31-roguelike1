@@ -41,8 +41,6 @@ namespace Roguelike.Tilemaps
         protected TileData _tileData;
 
         public Tile(Vector3Int position, TileData tileData){
-            _position = position;
-            _tileData = tileData;
             this.position   = position;
             _tileData       = tileData;
         }
