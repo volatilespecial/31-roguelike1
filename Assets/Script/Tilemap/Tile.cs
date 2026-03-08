@@ -59,8 +59,11 @@ namespace Roguelike.Tilemaps
             gameObject.transform.position = new Vector3(pos.x, pos.y, 0.0f);
         }
 
-        public Sprite GetSprite(){ return _tileData.sprite; }
-        public void SetSprite(Sprite sprite)
+        public void Destroy()
+        {
+            if (gameObject) UnityEngine.Object.Destroy(gameObject);
+            gameObject = null;
+        }
         {
             _tileData.sprite = sprite;
             gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
@@ -78,9 +81,20 @@ namespace Roguelike.Tilemaps
                 _                       => null,
             };
         }
+
+        public Sprite Sprite 
+        {
+            get => _tileData.sprite; 
+            set
+            {
+                _tileData.sprite = value;
+                if (gameObject) gameObject.GetComponent<SpriteRenderer>().sprite = value;
             }
-            return null;
         }
+
+        public TileType Type { get => _tileData.type; }
+        public int Variation { get => _tileData.variation; }
+        public TileFlagBorderDirection Flag { get => _tileData.flag; }
     }
 
 
