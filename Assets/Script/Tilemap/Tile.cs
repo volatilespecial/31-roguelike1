@@ -44,6 +44,18 @@ namespace Roguelike.Tilemaps
             this.position   = position;
             _tileData       = tileData;
         }
+
+        public void SetTileBorderDirection(TileFlagBorderDirection flag)
+        {
+            _tileData.flag = flag;
+            Sprite = GetTileDirectionSprite(flag);
+            if (gameObject)
+            {
+                SpriteRenderer sp = gameObject.GetComponent<SpriteRenderer>();
+                sp.sprite = Sprite;
+                sp.color = GetTileBrightnessColorFromElevation(position.z);
+            }
+                
         }
 
         public void Generate()
@@ -64,9 +76,28 @@ namespace Roguelike.Tilemaps
             if (gameObject) UnityEngine.Object.Destroy(gameObject);
             gameObject = null;
         }
+
+        public Sprite GetTileDirectionSprite(TileFlagBorderDirection flag)
         {
-            _tileData.sprite = sprite;
-            gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
+            return flag switch
+            {
+                TileFlagBorderDirection.NSEW  => _sprites[Type][Variation].spNSEW,
+                TileFlagBorderDirection.N     => _sprites[Type][Variation].spN,
+                TileFlagBorderDirection.S     => _sprites[Type][Variation].spS,
+                TileFlagBorderDirection.E     => _sprites[Type][Variation].spE,
+                TileFlagBorderDirection.W     => _sprites[Type][Variation].spW,
+                TileFlagBorderDirection.NW    => _sprites[Type][Variation].spNW,
+                TileFlagBorderDirection.SE    => _sprites[Type][Variation].spSE,
+                TileFlagBorderDirection.SW    => _sprites[Type][Variation].spSW,
+                TileFlagBorderDirection.NE    => _sprites[Type][Variation].spNE,
+                TileFlagBorderDirection.NS    => _sprites[Type][Variation].spNS,
+                TileFlagBorderDirection.EW    => _sprites[Type][Variation].spEW,
+                TileFlagBorderDirection.NSW   => _sprites[Type][Variation].spNSW,
+                TileFlagBorderDirection.SEW   => _sprites[Type][Variation].spSEW,
+                TileFlagBorderDirection.NSE   => _sprites[Type][Variation].spNSE,
+                TileFlagBorderDirection.NEW   => _sprites[Type][Variation].spNEW,
+                _                             => _sprites[Type][Variation].sp,
+            };
         }
 
         public static Tile GetTileFromType(TileType type, int variation,  Vector3Int position)
