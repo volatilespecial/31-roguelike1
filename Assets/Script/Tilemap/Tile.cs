@@ -66,40 +66,54 @@ namespace Roguelike.Tilemaps
             gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
         }
 
-        public static Tile GetTileFromType(TileType type, Vector3Int position)
+        public static Tile GetTileFromType(TileType type, int variation,  Vector3Int position)
         {
-            switch (type)
+            return type switch
             {
-                case TileType.WATER:    return new Water(position);
-                case TileType.SAND:     return new Sand(position);
-                case TileType.DIRT:     return new Dirt(position);
-                case TileType.GRASS:    return new Grass(position);
-                case TileType.ROCK:     return new Rock(position);
+                TileType.WATER          => new Water(position, variation),
+                TileType.SAND           => new Sand(position, variation),
+                TileType.DIRT           => new Dirt(position, variation),
+                TileType.GRASS          => new Grass(position, variation),
+                TileType.ROCK           => new Rock(position, variation),
+                _                       => null,
+            };
+        }
             }
             return null;
         }
     }
 
+
 #region TileType
     public class Water : Tile
     {
-        public Water(Vector3Int position) : base(position, new TileData(_sprites[TileType.WATER][0], false)) { }
+        public Water(Vector3Int position, int variation) 
+            : base(position, new TileData(_sprites[TileType.WATER][variation].sp, TileType.WATER, variation)) 
+        { }
     }
     public class Sand : Tile
     {
-        public Sand(Vector3Int position) : base(position, new TileData(_sprites[TileType.SAND][0], false)) { }
+        public Sand(Vector3Int position, int variation) 
+            : base(position, new TileData(_sprites[TileType.SAND][variation].sp, TileType.SAND, variation)) 
+        { }
     }
     public class Dirt : Tile
     {
-        public Dirt(Vector3Int position) : base(position, new TileData(_sprites[TileType.DIRT][0], false)) { }
+        public Dirt(Vector3Int position, int variation) 
+            : base(position, new TileData(_sprites[TileType.DIRT][variation].sp, TileType.DIRT, variation)) 
+        { }
     }
     public class Grass : Tile
     {
-        public Grass(Vector3Int position) : base(position, new TileData(_sprites[TileType.GRASS][0], false)) { }
+        public Grass(Vector3Int position, int variation) 
+            : base(position, new TileData(_sprites[TileType.GRASS][variation].sp, TileType.GRASS, variation)) 
+        { }
     }
     public class Rock : Tile
     {
-        public Rock(Vector3Int position) : base(position, new TileData(_sprites[TileType.ROCK][0], false)) { }
+        public Rock(Vector3Int position, int variation) 
+            : base(position, new TileData(_sprites[TileType.ROCK][variation].sp, TileType.ROCK, variation)) 
+        { }
     }
 #endregion
 }
