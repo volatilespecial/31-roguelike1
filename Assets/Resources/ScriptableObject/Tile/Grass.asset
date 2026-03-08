@@ -14,7 +14,67 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TileSpriteData
   type: 3
   sprites:
-  - {fileID: -4531809809410408299, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
-  - {fileID: 1583100675, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
-  - {fileID: -1455980271, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
-  - {fileID: 579602706, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+  - spNSEW: {fileID: -4531809809410408299, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    sp: {fileID: 1583100675, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spW: {fileID: -1455980271, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spN: {fileID: 579602706, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spS: {fileID: -17208044, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spE: {fileID: 93560003, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNW: {fileID: -1032453520, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spSE: {fileID: 902078294, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNE: {fileID: 283057198, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spSW: {fileID: 352948845, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNS: {fileID: -1138552758, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spEW: {fileID: -847130901, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNSW: {fileID: 1513177116, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spSEW: {fileID: 1407296957, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNSE: {fileID: -838097348, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNEW: {fileID: 16530101, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+  - spNSEW: {fileID: -2074277970, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    sp: {fileID: 876778302, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spW: {fileID: -1941513735, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spN: {fileID: 1320960511, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spS: {fileID: -1204191991, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spE: {fileID: -2029374853, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNW: {fileID: -1803755138, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spSE: {fileID: -3991989, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNE: {fileID: 1460265082, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spSW: {fileID: -1982766079, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNS: {fileID: -1687652369, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spEW: {fileID: 1809968460, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNSW: {fileID: -1787428375, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spSEW: {fileID: -1409853259, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNSE: {fileID: 1890352888, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNEW: {fileID: 501776948, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+  - spNSEW: {fileID: 387704437, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    sp: {fileID: 1180824674, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spW: {fileID: -29962089, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spN: {fileID: 734781214, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spS: {fileID: -1909852009, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spE: {fileID: -252929038, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNW: {fileID: -1843628703, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spSE: {fileID: -1194005425, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNE: {fileID: -1369250065, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spSW: {fileID: -113025543, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNS: {fileID: 2033871749, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spEW: {fileID: 199234858, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNSW: {fileID: -1483129184, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spSEW: {fileID: -1288222927, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNSE: {fileID: -438684875, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNEW: {fileID: -456689654, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+  - spNSEW: {fileID: -1320662757, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    sp: {fileID: -1322034029, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spW: {fileID: 1159242912, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spN: {fileID: -297640700, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spS: {fileID: -2101063213, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spE: {fileID: 26565012, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNW: {fileID: -2064656486, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spSE: {fileID: 413691223, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNE: {fileID: -966481118, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spSW: {fileID: -1723947279, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNS: {fileID: 2054067824, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spEW: {fileID: -90110653, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNSW: {fileID: 2035362277, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spSEW: {fileID: 788175784, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNSE: {fileID: -1005663074, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+    spNEW: {fileID: -919830470, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
