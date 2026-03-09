@@ -54,7 +54,7 @@ public class Chunk
                     Vector3Int tilePosition = new Vector3Int(x + position.x * k_xSize, y + position.y * k_ySize, z);
                     if (z == maxz) tile = Tile.GetTileFromType(type, 0, tilePosition);
                     else tile = Tile.GetTileFromType(TileType.DIRT, 0, tilePosition);
-                    tilemap.SetTile(tilePosition, tile);
+                    tilemap.SetTile(tilePosition, tile, false);
                 }
             }
         }
@@ -155,7 +155,7 @@ public class Chunk
                                 : 0)
                             : TileFlagBorderDirection.N;
                 }
-                tilemap.GetTile(neighbord).SetTileBorderDirection(flag);
+                tilemap.GetTile(local).SetTileBorderDirection(flag);
             }
 
         }
