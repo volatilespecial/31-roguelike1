@@ -38,13 +38,13 @@ public class WorldGenerator : MonoBehaviour
                     new Vector3Int( 0, -1,  0) + chunkPos,
 
                 };
-                if (_chunks.ContainsKey(chunkPos)) continue;
+                if (GetChunk(chunkPos) != null) continue;
                 Chunk newChunk = new Chunk(gameObject, chunkPos);
                 newChunk.Generate();
                 for (int k = 0; k < 4; ++k)
                 {
-                    if (!_chunks.ContainsKey(offsets[k])) continue;
-                    Chunk neighbord = _chunks[offsets[k]];
+                    if (GetChunk(offsets[k]) == null) continue;
+                    Chunk neighbord = GetChunk(offsets[k]);
                     neighbord.UpdateBorderedTile(newChunk.tilemap, newChunk.position);
                     newChunk.UpdateBorderedTile(neighbord.tilemap, neighbord.position);
                 }
