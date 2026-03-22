@@ -6,8 +6,8 @@ using Roguelike.Noise;
 
 public class Chunk
 {
-    public static readonly int k_xSize = 16;
-    public static readonly int k_ySize = 16;
+    public static readonly int k_xSize = 17;
+    public static readonly int k_ySize = 17;
     public static readonly int k_zSize = 10;
 
     public Tilemap tilemap;    
@@ -23,13 +23,15 @@ public class Chunk
     public void Generate(Dictionary<string, Sprite[]> sprites)
     {
         tilemap.tiles.Clear();
-        float[] noiseMap = MapGenerator.Generate(new Vector2Int(k_xSize, k_ySize), new Vector2(position.x, position.y), MapType.PERLIN_NOISE);
+        // float[] noiseMap = MapGenerator.Generate(new Vector2Int(k_xSize, k_ySize), new Vector2(position.x, position.y), MapType.PERLIN_NOISE);
+        // float[] noiseMap = MapGenerator.Generate(new Vector2Int(k_xSize, k_ySize), new Vector2(position.x, position.y), MapType.PERLIN_FRACTAL_NOISE);
+        float[] noiseMap = MapGenerator.Generate(new Vector2Int(k_xSize, k_ySize), new Vector2(position.x, position.y), MapType.DIAMOND_SQUARE);
         for (int y = 0; y < k_ySize; ++y)
         {
             for (int x = 0; x < k_xSize; ++x)
             {
                 string type = "";
-                int maxz =  Mathf.RoundToInt(noiseMap[y * k_xSize + x] * 5 + 2);
+                int maxz =  Mathf.RoundToInt(noiseMap[y * k_xSize + x]);
                 switch (maxz)
                 {
                     case 2:
