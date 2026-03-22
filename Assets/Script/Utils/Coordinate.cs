@@ -12,9 +12,15 @@ namespace Roguelike.Utils
 
         public static Vector3Int WorldToIso(Vector3 worldPos)
         {
-            int x = Mathf.FloorToInt((worldPos.y / tileHeight) + (worldPos.x / tileWidth) - worldPos.z * elevationScale); 
-            int y = Mathf.FloorToInt((worldPos.y / tileHeight) - (worldPos.x / tileWidth) - worldPos.z * elevationScale);
-            return new Vector3Int(x, y, (int)worldPos.z);
+            float halfWidth = tileWidth * 0.5f; 
+            float halfHeight = tileHeight * 0.5f; 
+            float y = worldPos.y - worldPos.z * elevationScale - elevationScale;  
+            float a = worldPos.x / halfWidth; 
+            float b = y / halfHeight; 
+            int isoX = Mathf.RoundToInt((a + b) * 0.5f); 
+            int isoY = Mathf.RoundToInt((b - a) * 0.5f); 
+            int isoZ = Mathf.RoundToInt(worldPos.z); 
+            return new Vector3Int(isoX, isoY, isoZ);
         }
 
         public static Vector3Int WorldToChunk(Vector3 worldPos)
@@ -30,6 +36,20 @@ namespace Roguelike.Utils
             float x = (iso.x - iso.y) * (tileWidth * 0.5f);  
             float y = (iso.x + iso.y) * (tileHeight * 0.5f) + iso.z * elevationScale;
             return new Vector3(x, y, iso.z);
+        }
+
+        public static Vector3Int IsoToChunk(Vector3Int iso)
+        {
+            return new Vector3Int(Mathf.FloorToInt((float)iso.x / (float)Chunk.k_xSize), 
+                                  Mathf.FloorToInt((float)iso.y / (float)Chunk.k_ySize),
+                                  0);
+        }
+
+        public static Vector3Int IsoToChunkLocalPosition(Vector3Int iso)
+        {
+            int x = Math.Mod(iso.x, Chunk.k_xSize);
+            int y = Math.Mod(iso.y, Chunk.k_ySize);
+            return new Vector3Int(x, y, iso.z);
         }
     }
 }

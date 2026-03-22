@@ -1,18 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Roguelike.Tilemaps;
+
 namespace Roguelike.Resources{
     public static class ResourcesManager
     {
-        public static Dictionary<string, Sprite[]> LoadTilesData()
+        public static Dictionary<TileType, TileBorderDirectionSprite[]> LoadTilesData()
         {
-            Dictionary<string, Sprite[]> ret = new Dictionary<string, Sprite[]>();
+            Dictionary<TileType, TileBorderDirectionSprite[]> ret = new Dictionary<TileType, TileBorderDirectionSprite[]>();
             Object[] tilesData = UnityEngine.Resources.LoadAll("ScriptableObject/Tile", typeof(TileSpriteData));
             foreach(TileSpriteData data in tilesData)
             {  
-               ret.Add(data.name, data.sprites); 
+                ret.Add(data.type, data.sprites); 
             }
             return ret;
-        }  
+        }
     }
 }

@@ -1,23 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Roguelike.Resources;
 using Roguelike.Utils;
 
 public class WorldGenerator : MonoBehaviour
 {
-    private Dictionary<string, Sprite[]> _tileSprites;
-    public Dictionary<Vector3Int, Chunk> chunks;
-
+    private Dictionary<Vector3Int, Chunk> _chunks;
 
     public int renderDistance;
     public Transform center;
 
-
     void Awake()
     {
-        _tileSprites = ResourcesManager.LoadTilesData();
-        chunks = new Dictionary<Vector3Int, Chunk>();
+        _chunks = new Dictionary<Vector3Int, Chunk>();
     }
 
 
@@ -35,16 +30,31 @@ public class WorldGenerator : MonoBehaviour
             for (int j = -renderDistance; j < renderDistance+1; ++j)
             {
                 Vector3Int chunkPos = new Vector3Int(i + pos.x, j + pos.y, 0);
-                if (chunks.ContainsKey(chunkPos)) continue;
+                Vector3Int[] offsets =
+                {
+                    new Vector3Int( 1,  0,  0) + chunkPos,
+                    new Vector3Int(-1,  0,  0) + chunkPos,
+                    new Vector3Int( 0,  1,  0) + chunkPos,
+                    new Vector3Int( 0, -1,  0) + chunkPos,
+
+                };
+                if (GetChunk(chunkPos) != null) continue;
                 Chunk newChunk = new Chunk(gameObject, chunkPos);
-                newChunk.Generate(_tileSprites);
-                chunks.Add(chunkPos, newChunk);
+                newChunk.Generate();
+                for (int k = 0; k < 4; ++k)
+                {
+                    if (GetChunk(offsets[k]) == null) continue;
+                    Chunk neighbord = GetChunk(offsets[k]);
+                    neighbord.UpdateBorderedTile(newChunk.tilemap, newChunk.position);
+                    newChunk.UpdateBorderedTile(neighbord.tilemap, neighbord.position);
+                }
+                _chunks.Add(chunkPos, newChunk);
             }
         }
         // Update current chunk
         // Remove non visible chunk
         List<Vector3Int> toRemove = new List<Vector3Int>();
-        foreach(var (chunkPos, _) in chunks)
+        foreach(var (chunkPos, _) in _chunks)
         {
             Vector3Int diff = pos - chunkPos;
             if (diff.x > renderDistance || diff.x < -renderDistance 
@@ -56,10 +66,15 @@ public class WorldGenerator : MonoBehaviour
 
         foreach(var chunkPos in toRemove)
         {
-            UnityEngine.Object.Destroy(chunks[chunkPos].tilemap.gameObject);
-            chunks.Remove(chunkPos);
+            UnityEngine.Object.Destroy(_chunks[chunkPos].tilemap.gameObject);
+            _chunks.Remove(chunkPos);
         }
     }
-
+    
+    public Chunk GetChunk(Vector3Int position)
+    {
+        if (!_chunks.ContainsKey(position)) return null;
+        return _chunks[position];
+    }
 
 }

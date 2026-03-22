@@ -1,100 +1,84 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 using Roguelike.Utils;
+using NUnit.Framework;
 
 namespace Roguelike.Tilemaps{
-    [Serializable]
-    public struct TileData
-    {
-        public Sprite sprite;
-        public bool seleted;
-    }
-
-    public class Tile
-    {
-        public GameObject gameObject = null;
-
-        private Vector3Int _position;
-        private TileData _tileData;
-
-        public Tile(Vector3Int position, TileData tileData){
-            _position = position;
-            _tileData = tileData;
-        }
-
-        public void Generate()
-        {
-            if (gameObject) UnityEngine.Object.Destroy(gameObject);
-            gameObject = new GameObject("Tile " + _position.x + " " + _position.y + " " + _position.z);
-            SpriteRenderer sp = gameObject.AddComponent<SpriteRenderer>();
-            sp.sprite = _tileData.sprite;
-
-            Vector3 pos = Coordinate.IsoToWorld(_position);
-
-            sp.sortingOrder = -(_position.x + _position.y) + _position.z * 5;
-            gameObject.transform.position = new Vector3(pos.x, pos.y, 0.0f);
-        }
-
-        public Sprite GetSprite(){ return _tileData.sprite; }
-        public void SetSprite(Sprite sprite)
-        {
-            _tileData.sprite = sprite;
-            gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
-        }
-    }
-
     public class Tilemap
     {
-        private Vector3Int _min;
-        private Vector3Int _max;
-
         public GameObject gameObject = null;
+        private Tile[] _tiles;
         
-        public Dictionary<Vector3Int, Tile> tiles;
-
         public Tilemap(string name = "Tilemap")
         {
             gameObject = new GameObject(name);
-            tiles = new Dictionary<Vector3Int, Tile>();
-            _min = new Vector3Int(0, 0, 0);
-            _max = new Vector3Int(0, 0, 0);
-        }
-
-
-        public Tile GetTile(Vector3Int position)
-        {
-            if (!tiles.ContainsKey(position)) return null;
-            return tiles[position];
-        }
-
-        public void SetTile(Vector3Int position, TileData tileData)
-        {
-            _min.x = position.x < _min.x ? position.x : _min.x;
-            _min.y = position.y < _min.y ? position.y : _min.y;
-            _min.z = position.z < _min.z ? position.z : _min.z;
-
-            _max.x = position.x > _max.x ? position.x : _max.x;
-            _max.y = position.y > _max.y ? position.y : _max.y;
-            _max.z = position.z > _max.z ? position.z : _max.z;
-
-            tiles[position] = new Tile(position, tileData);
+            _tiles = new Tile[Chunk.k_xSize * Chunk.k_ySize * Chunk.k_zSize];
         }
 
         public void Generate()
         {
             string name = "Tilemap";
-            if (gameObject) {
-                name = gameObject.name;
-                UnityEngine.Object.Destroy(gameObject);
-            }
-            gameObject = new GameObject(name);
-            foreach(var (_, tile) in tiles)
+            if (!gameObject) gameObject = new GameObject(name);
+
+            Vector3Int[] offsets =
             {
-                tile.Generate();
-                tile.gameObject.transform.SetParent(gameObject.transform);
-            }            
+                new Vector3Int(-1, 0, 0),
+                new Vector3Int(0, -1, 0),
+                new Vector3Int(0, 0, 1),
+            };
+
+            for (int z = 0; z < Chunk.k_zSize; ++z)
+            {
+                for (int y = 0; y < Chunk.k_ySize; ++y)
+                {
+                    for (int x = 0; x < Chunk.k_xSize; ++x)
+                    {
+                        Vector3Int tilePos = new Vector3Int(x, y, z);
+                        int i = Chunk.LocalToIndex(tilePos);
+                        bool visible = false;
+                        if (_tiles[i] == null) continue;
+                        for (int j = 0; j < 3 && !visible; ++j)
+                        {
+                            Vector3Int offPos = tilePos + offsets[j];
+                            if (!Chunk.IsInBound(offPos) || _tiles[Chunk.LocalToIndex(offPos)] == null) visible = true;
+                        }
+                        if (!visible)
+                        {
+                            if (_tiles[i].gameObject != null) _tiles[i].Destroy();
+                            continue;  
+                        }
+                        if (_tiles[i].gameObject != null) continue;
+                        _tiles[i].Generate();
+                        _tiles[i].gameObject.transform.SetParent(gameObject.transform); 
+                    }
+                }
+            }
+        }
+
+        public Tile GetTile(Vector3Int position, bool isLocalPos = true)
+        {
+            Vector3Int local = position;
+            if (!isLocalPos)
+                local = Coordinate.IsoToChunkLocalPosition(position); 
+            if (!Chunk.IsInBound(local)) return null;
+            return _tiles[Chunk.LocalToIndex(local)];
+        }
+
+        public int SetTile(Vector3Int position, Tile tile,  bool isLocalPos = true)
+        {
+            Vector3Int local = position;
+            if (!isLocalPos)
+                local = Coordinate.IsoToChunkLocalPosition(position);
+            if (!Chunk.IsInBound(local)) return 1;
+            _tiles[Chunk.LocalToIndex(local)] = tile;
+            return 0;
+        }
+
+        public void Clear()
+        {
+            int size = Chunk.k_xSize * Chunk.k_ySize * Chunk.k_zSize;
+            for (int i = 0; i < size; ++i)
+                _tiles[i] = null;          
         }
     }
 }
