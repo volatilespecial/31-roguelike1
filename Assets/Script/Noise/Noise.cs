@@ -104,35 +104,65 @@ namespace Roguelike.Noise
         private static void GeneratePerlinFractalNoise(Vector2Int size, Vector2 offset, ref float[] noisemap)
         {
 
-            float frequency = 0.02f;
-            int octaves = 6;
-            float lacunarity = 2.0f;
-            float persistance = 0.6f;
+            // float frequency = 0.05f;
+            // int octaves = 3;
+            // float lacunarity = 2.0f;
+            // float persistance = 0.6f;
 
+            // for (int y = 0; y < size.y; y++)
+            // {
+            //     for (int x = 0; x < size.x; x++)
+            //     {
+            //         float total = 0;
+            //         float t_frequency = frequency;
+            //         float t_amplitude = 1.0f;
+            //         float maxAmplitude = 0.0f;
+
+            //         for (int k = 0; k < octaves; k++)
+            //         {
+            //             float sample_x = (x + offset.x * size.x) * t_frequency;
+            //             float sample_y = (y + offset.y * size.y) * t_frequency;
+
+            //             total += Noise.PerlinNoise(new Vector2(sample_x, sample_y)) * t_amplitude;
+
+            //             maxAmplitude += t_amplitude;
+            //             t_frequency *= lacunarity;
+            //             t_amplitude *= persistance;
+            //         }
+            //         noisemap[y * size.x + x] = total / maxAmplitude;
+            //     }
+            // }
+
+            int octaves = 3;
+            float lacunarity = 2.0f;
+            float persistence = 0.6f;
+            
             for (int y = 0; y < size.y; y++)
             {
                 for (int x = 0; x < size.x; x++)
                 {
-                    float total = 0;
-                    float t_frequency = frequency;
-                    float t_amplitude = 1.0f;
-                    float maxAmplitude = 0.0f;
-
+                    float noise = 0;
+                    float amplitude = 1.0f;
+                    float frequency = 0.045f;
+                    float maxPossibleHeight = 0.0f;
                     for (int k = 0; k < octaves; k++)
                     {
-                        float sample_x = (x + offset.x * size.x) * t_frequency;
-                        float sample_y = (y + offset.y * size.y) * t_frequency;
-
-                        total += Noise.PerlinNoise(new Vector2(sample_x, sample_y)) * t_amplitude;
-
-                        maxAmplitude += t_amplitude;
-                        t_frequency *= lacunarity;
-                        t_amplitude *= persistance;
+                        float sample_x = x * frequency + offset.x;
+                        float sample_y = y * frequency + offset.y;
+                        
+                        float perlinValue = Noise.PerlinNoise(new Vector2(sample_x, sample_y));
+                        noise += perlinValue * amplitude;
+                        
+                        maxPossibleHeight += amplitude;
+                        frequency *= lacunarity;
+                        amplitude *= persistence;
                     }
-                    noisemap[y * size.x + x] = total / maxAmplitude;
+                    Debug.Log("maxPossibleHeight " + maxPossibleHeight);
+
+                    float normalizedNoise = noise / maxPossibleHeight;
+                    noisemap[y * size.x + x] = normalizedNoise;
                 }
             }
-
         }
 
         public static float[] Generate(Vector2Int size, Vector2 offset, MapType type)
