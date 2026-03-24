@@ -33,9 +33,11 @@ public class PlayerMovement : MonoBehaviour
             tempPos = new Vector3(transform.position.x, transform.position.y, zValue);
             chunkPos = Coordinate.WorldToChunk(tempPos);
             tilePos = Coordinate.WorldToIso(tempPos);
-            if (!worldGenerator.chunks.ContainsKey(chunkPos)) break; 
-            else if (worldGenerator.chunks[chunkPos].tilemap.tiles.ContainsKey(tilePos)) zValue += 1;
-            else break;
+            // if (!worldGenerator.chunks.ContainsKey(chunkPos)) break; 
+            // else if (worldGenerator.chunks[chunkPos].tilemap.tiles.ContainsKey(tilePos)) ;
+            // else break;
+            zValue += 1;
+            // break;
         }
 
         Debug.Log("Chunk : " + chunkPos.x + " " + chunkPos.y + " Tile : " + tilePos.x + " " + tilePos.y + " " + zValue);

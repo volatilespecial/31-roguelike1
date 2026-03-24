@@ -6,8 +6,8 @@ using Roguelike.Utils;
 
 public class Chunk
 {
-    public static readonly int k_xSize = 16;
-    public static readonly int k_ySize = 16;
+    public static readonly int k_xSize = 17;
+    public static readonly int k_ySize = 17;
     public static readonly int k_zSize = 10;
 
     public Tilemap tilemap;    
@@ -23,7 +23,7 @@ public class Chunk
     public void Generate()
     {
         tilemap.Clear();
-        float[] noiseMap = MapGenerator.Generate(new Vector2Int(k_xSize, k_ySize), new Vector2(position.x, position.y), MapType.PERLIN_NOISE);
+        float[] noiseMap = MapGenerator.Generate(new Vector2Int(k_xSize, k_ySize), new Vector2(position.x, position.y), MapType.PERLIN_FRACTAL_NOISE);
         for (int y = 0; y < k_ySize; ++y)
         {
             for (int x = 0; x < k_xSize; ++x)
