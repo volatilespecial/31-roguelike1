@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace Roguelike.Utils
 {
-    
     public static class Coordinate
     {
         public static readonly float tileWidth = 1f;
@@ -23,6 +22,20 @@ namespace Roguelike.Utils
             return new Vector3Int(isoX, isoY, isoZ);
         }
 
+        public static Vector3 WorldToIsoCoordinate(Vector3 worldPos)
+        {
+            float halfWidth = tileWidth * 0.5f; 
+            float halfHeight = tileHeight * 0.5f; 
+            float y = worldPos.y - worldPos.z;  
+            float a = worldPos.x / halfWidth; 
+            float b = y / halfHeight;  
+            float isoX = (a + b) * 0.5f; 
+            float isoY = (b - a) * 0.5f; 
+            float isoZ = worldPos.z; 
+            return new Vector3(isoX, isoY, (int)isoZ); 
+        }
+
+
         public static Vector3Int WorldToChunk(Vector3 worldPos)
         {
             Vector3Int iso = WorldToIso(worldPos);
@@ -36,6 +49,14 @@ namespace Roguelike.Utils
             float x = (iso.x - iso.y) * (tileWidth * 0.5f);  
             float y = (iso.x + iso.y) * (tileHeight * 0.5f) + iso.z * elevationScale;
             return new Vector3(x, y, iso.z);
+        
+        }
+        
+        public static Vector3 IsoToWorld(Vector3 iso)
+        {
+            float x = (iso.x - iso.y) * (tileWidth * 0.5f);  
+            float y = (iso.x + iso.y) * (tileHeight * 0.5f) + iso.z * elevationScale;
+            return new Vector3(x, y, iso.z);
         }
 
         public static Vector3Int IsoToChunk(Vector3Int iso)
@@ -45,12 +66,27 @@ namespace Roguelike.Utils
                                   0);
         }
 
+        public static Vector3Int IsoToChunk(Vector3 iso)
+        {
+            return new Vector3Int(Mathf.FloorToInt(iso.x / Chunk.k_xSize), 
+                                  Mathf.FloorToInt(iso.y / Chunk.k_ySize),
+                                  0);
+        }
+
         public static Vector3Int IsoToChunkLocalPosition(Vector3Int iso)
         {
             int x = Math.Mod(iso.x, Chunk.k_xSize);
             int y = Math.Mod(iso.y, Chunk.k_ySize);
             return new Vector3Int(x, y, iso.z);
         }
+        
+        public static Vector3Int IsoToChunkLocalPosition(Vector3 iso)
+        {
+            int x = Math.Mod((int)iso.x, Chunk.k_xSize);
+            int y = Math.Mod((int)iso.y, Chunk.k_ySize);
+            return new Vector3Int(x, y, (int)iso.z);
+        }
+
     }
 }
 
