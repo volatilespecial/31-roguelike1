@@ -5,14 +5,17 @@ using UnityEngine;
 using Roguelike.Utils;
 using Roguelike.Resources;
 
-namespace Roguelike.Tilemaps
+namespace Roguelike.Tilemap.NTile
 {
     public enum TileType
     {
+        NONE,
         WATER, 
         SAND, 
         DIRT, GRASS, 
         ROCK,
+        SNOW, 
+        SNOWY_DIRT, SNOWY_GRASS, SNOWY_ROCK,  
     }
 
     [Serializable]
@@ -25,15 +28,16 @@ namespace Roguelike.Tilemaps
 
         public TileData(Sprite sprite, TileType type, int variation, TileFlagBorderDirection flag = 0)
         {
-            this.sprite = sprite;
-            this.type = type;
-            this.variation = variation;
-            this.flag = flag; 
+            this.sprite     = sprite;
+            this.type       = type;
+            this.variation  = variation;
+            this.flag       = flag; 
         }
     }
 
     public class Tile
     {
+        protected static GameObject _prefab = ResourcesManager.LoadTilePrefab();
         protected static Dictionary<TileType, TileBorderDirectionSprite[]> _sprites = ResourcesManager.LoadTilesData();
         public GameObject gameObject = null;
 
@@ -61,20 +65,32 @@ namespace Roguelike.Tilemaps
         public void Generate()
         {
             if (gameObject) UnityEngine.Object.Destroy(gameObject);
-            gameObject = new GameObject("Tile " + Coordinate.IsoToChunkLocalPosition(position));
-            SpriteRenderer sp = gameObject.AddComponent<SpriteRenderer>();
+            gameObject = UnityEngine.Object.Instantiate(_prefab);
+            SpriteRenderer sp = gameObject.GetComponent<SpriteRenderer>();
             sp.sprite = Sprite;
             sp.color = GetTileBrightnessColorFromElevation(position.z);
             Vector3 pos = Coordinate.IsoToWorld(position);
-
-            sp.sortingOrder = -(position.x + position.y) + position.z * 5;
-            gameObject.transform.position = new Vector3(pos.x, pos.y, 0.0f);
+            SetSortingOrder();
+            gameObject.transform.position = new Vector3(pos.x, pos.y, pos.z);
         }
 
         public void Destroy()
         {
             if (gameObject) UnityEngine.Object.Destroy(gameObject);
             gameObject = null;
+        }
+
+        public void SetSortingOrder()
+        {
+            int average = 0;
+            for (int y = -1; y <= 1; ++y)
+            {
+                for (int x = -1; x <= 1; ++x)
+                {
+                    average += -1 * (x + position.x + y + position.y); 
+                }
+            }
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = average / 9 + position.z;
         }
 
         public Sprite GetTileDirectionSprite(TileFlagBorderDirection flag)
@@ -109,8 +125,17 @@ namespace Roguelike.Tilemaps
                 TileType.DIRT           => new Dirt(position, variation),
                 TileType.GRASS          => new Grass(position, variation),
                 TileType.ROCK           => new Rock(position, variation),
+                TileType.SNOW           => new Snow(position, variation),
+                TileType.SNOWY_DIRT     => new SnowyDirt(position, variation),
+                TileType.SNOWY_GRASS    => new SnowyGrass(position, variation),
+                TileType.SNOWY_ROCK     => new SnowyRock(position, variation),
                 _                       => null,
             };
+        }
+
+        public static int GetTileTypeVariationCount(TileType type)
+        {
+            return _sprites[type].Length;
         }
 
         public static Color GetTileBrightnessColorFromElevation(float elevation)
@@ -166,5 +191,34 @@ namespace Roguelike.Tilemaps
             : base(position, new TileData(_sprites[TileType.ROCK][variation].sp, TileType.ROCK, variation)) 
         { }
     }
+
+    public class Snow : Tile
+    {
+        public Snow(Vector3Int position, int variation) 
+            : base(position, new TileData(_sprites[TileType.ROCK][variation].sp, TileType.SNOW, variation)) 
+        { }
+    }
+    
+    public class SnowyDirt : Tile
+    {
+        public SnowyDirt(Vector3Int position, int variation) 
+            : base(position, new TileData(_sprites[TileType.ROCK][variation].sp, TileType.SNOWY_DIRT, variation)) 
+        { }
+    }
+
+    public class SnowyGrass : Tile
+    {
+        public SnowyGrass(Vector3Int position, int variation) 
+            : base(position, new TileData(_sprites[TileType.ROCK][variation].sp, TileType.SNOWY_GRASS, variation)) 
+        { }
+    }
+
+    public class SnowyRock : Tile
+    {
+        public SnowyRock(Vector3Int position, int variation) 
+            : base(position, new TileData(_sprites[TileType.ROCK][variation].sp, TileType.SNOWY_ROCK, variation)) 
+        { }
+    }
+
 #endregion
 }

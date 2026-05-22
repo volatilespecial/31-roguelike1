@@ -5,13 +5,18 @@ using Roguelike.Utils;
 
 public class WorldGenerator : MonoBehaviour
 {
+    public static WorldGenerator singleton = null;
+
+
     private Dictionary<Vector3Int, Chunk> _chunks;
 
     public int renderDistance;
     public Transform center;
+    public BiomeCollection biomeCollection;
 
     void Awake()
     {
+        singleton = this;
         _chunks = new Dictionary<Vector3Int, Chunk>();
     }
 
@@ -40,7 +45,7 @@ public class WorldGenerator : MonoBehaviour
                 };
                 if (GetChunk(chunkPos) != null) continue;
                 Chunk newChunk = new Chunk(gameObject, chunkPos);
-                newChunk.Generate();
+                newChunk.Generate(biomeCollection);
                 for (int k = 0; k < 4; ++k)
                 {
                     if (GetChunk(offsets[k]) == null) continue;

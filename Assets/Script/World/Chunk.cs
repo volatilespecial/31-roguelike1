@@ -1,6 +1,8 @@
 using UnityEngine;
 
-using Roguelike.Tilemaps;
+using Roguelike.Tilemap;
+using Roguelike.Tilemap.NTile;
+using Roguelike.Tilemap.NProp;
 using Roguelike.Noise;
 using Roguelike.Utils;
 
@@ -8,54 +10,48 @@ public class Chunk
 {
     public static readonly int k_xSize = 17;
     public static readonly int k_ySize = 17;
-    public static readonly int k_zSize = 10;
+    public static readonly int k_zSize = 64;
 
-    public Tilemap tilemap;    
+    public Tilemap tilemap;  
     public Vector3Int position;
 
     public Chunk(GameObject parent, Vector3Int pos)
     {
         position = pos;
-        tilemap = new Tilemap("Tilemap " + pos.x + " " + pos.y);
+        tilemap = new Tilemap("Tilemap " + pos.x + " " + pos.y, pos);
         tilemap.gameObject.transform.SetParent(parent.transform);
     }
 
-    public void Generate()
+    public void Generate(BiomeCollection biomeCollection)
     {
         tilemap.Clear();
-        float[] noiseMap = MapGenerator.Generate(new Vector2Int(k_xSize, k_ySize), new Vector2(position.x, position.y), MapType.PERLIN_FRACTAL_NOISE);
+        float[,] noiseMap = MapGenerator.Generate(new Vector2Int(k_xSize + 1, k_ySize + 1), new Vector2(position.x * Chunk.k_xSize, position.y * Chunk.k_ySize), MapType.PERLIN_FRACTAL_NOISE);
+        float[,] altitudeMap = biomeCollection.GetAltitudeMap(new Vector2Int(position.x, position.y), ref noiseMap);
         for (int y = 0; y < k_ySize; ++y)
         {
             for (int x = 0; x < k_xSize; ++x)
             {
-                TileType type;
-                int maxz =  Mathf.RoundToInt(noiseMap[y * k_xSize + x] * 5 + 2);
-                switch (maxz)
-                {
-                    case 2:
-                        type = TileType.WATER;
-                        break;
-                    case 3: 
-                        type = TileType.SAND;
-                        break;
-                    case 4:
-                        type = TileType.GRASS;
-                        break;
-                    case 5:
-                        type = TileType.ROCK;
-                        break;
-                    default:
-                        type = TileType.DIRT;
-                        break;
-                }
+                BiomeData biome = biomeCollection.GetBiome(x, y, new Vector2Int(position.x, position.y));
+                int maxz =  (int)altitudeMap[x, y];
+                float variationValue = BiomeValueGenerator.singleton.GetVariation(x + position.x * k_xSize, y + position.y * k_ySize);
                 for (int z = maxz; z >= 0; --z)
                 {
-                    Tile tile;
+                    TileType tileType = biome.GetBiomeTileType(z, maxz);
                     Vector3Int tilePosition = new Vector3Int(x + position.x * k_xSize, y + position.y * k_ySize, z);
-                    if (z == maxz) tile = Tile.GetTileFromType(type, 0, tilePosition);
-                    else tile = Tile.GetTileFromType(TileType.DIRT, 0, tilePosition);
+                    int nbVariation = Tile.GetTileTypeVariationCount(tileType);
+                    int variation = 0;
+                    float variationThreshold = 0.95f;
+                    if (nbVariation > 1 && variationValue > variationThreshold)
+                    {
+                        variation = (int)Mathf.Lerp(0, nbVariation, (variationValue - variationThreshold) / (1.0f - variationThreshold));
+                    }
+                    Tile tile = Tile.GetTileFromType(tileType, variation, tilePosition);
                     tilemap.SetTile(tilePosition, tile, false);
                 }
+                Vector3Int propPosition = new Vector3Int(x + position.x * k_xSize, y + position.y * k_ySize, maxz+1);
+                PropType type = biome.GetPropType(propPosition.x, propPosition.y, 0); 
+                if (type != PropType.NONE) tilemap.SetProp(propPosition, Prop.GetPropFromType(type, propPosition), false);
+
             }
         }
         UpdateBorderedTile();
@@ -157,7 +153,6 @@ public class Chunk
                 }
                 tilemap.GetTile(local).SetTileBorderDirection(flag);
             }
-
         }
     }
 
@@ -169,8 +164,8 @@ public class Chunk
         return true;
     }
 
-    public static int LocalToIndex(Vector3Int local)
+    public static uint LocalToIndex(Vector3Int local)
     {
-        return local.z * k_ySize * k_xSize + local.y * k_xSize + local.x;
+        return (uint)(local.z * k_ySize * k_xSize + local.y * k_xSize + local.x);
     }
 }

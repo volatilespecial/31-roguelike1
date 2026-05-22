@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ef920239265ff13826c4ce9b950f95, type: 3}
+  m_Name: Snowy_Grass
+  m_EditorClassIdentifier: Assembly-CSharp::TileSpriteData
+  type: 8
+  sprites:
+  - spNSEW: {fileID: -180052108, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    sp: {fileID: -1727780233, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spW: {fileID: 347893178, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spN: {fileID: 2056480368, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spS: {fileID: 1538146168, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spE: {fileID: -92582663, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNW: {fileID: -1627613989, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spSE: {fileID: -322330924, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNE: {fileID: -408989621, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spSW: {fileID: 1153176778, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNS: {fileID: -995464852, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spEW: {fileID: -340635515, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNSW: {fileID: 1129954883, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spSEW: {fileID: -41387699, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNSE: {fileID: -190303526, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNEW: {fileID: 1793579645, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}

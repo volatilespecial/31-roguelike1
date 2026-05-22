@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ef920239265ff13826c4ce9b950f95, type: 3}
+  m_Name: Snow
+  m_EditorClassIdentifier: Assembly-CSharp::TileSpriteData
+  type: 6
+  sprites:
+  - spNSEW: {fileID: 732097672, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    sp: {fileID: -1307191290, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spW: {fileID: -1640174399, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spN: {fileID: 343806449, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spS: {fileID: -1019603414, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spE: {fileID: 1920867270, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNW: {fileID: 965138064, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spSE: {fileID: 1788943214, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNE: {fileID: 1515081683, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spSW: {fileID: -1512694158, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNS: {fileID: -1606525333, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spEW: {fileID: -670969320, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNSW: {fileID: -882056082, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spSEW: {fileID: -881859335, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNSE: {fileID: -1951644806, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNEW: {fileID: -899003572, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
