@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 210667243}
   - component: {fileID: 210667241}
+  - component: {fileID: 210667244}
   m_Layer: 0
   m_Name: WorldGenerator
   m_TagString: Untagged
@@ -148,8 +149,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d33e444f2f3d0abc0ac9e06dd2e8a009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldGenerator
-  renderDistance: 2
+  renderDistance: 1
   center: {fileID: 1093767836}
+  biomeCollection: {fileID: 11400000, guid: c79480749dbd9a38bbc21a8aa2e999a7, type: 2}
 --- !u!4 &210667243
 Transform:
   m_ObjectHideFlags: 0
@@ -165,6 +167,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &210667244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210667240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90730563575a3c964901692d032133ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BiomeValueGenerator
+  temperatureScale: 250
+  humidityScale: 250
+  temperatureOffset: {x: 0, y: 0}
+  humidityOffset: {x: 0, y: 0}
+  variationOffset: {x: 0, y: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,6 +196,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -271,7 +291,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -300,8 +320,23 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1093767836}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa6677976b4c665c484980c1930733de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
+  target: {fileID: 1093767836}
+  offset: {x: 0, y: 0, z: 0}
+  deltaTime: 0.25
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,7 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   worldGenerator: {fileID: 210667241}
-  speed: 0.05
+  speed: 30
 --- !u!212 &1093767835
 SpriteRenderer:
   serializedVersion: 2
@@ -467,7 +502,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -847130901, guid: 650b0139b290c56c8af88222867e93fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 30d330b09b8da392ca0f069ec166800f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -489,8 +524,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 519420032}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
@@ -498,5 +532,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 619394802}
-  - {fileID: 1093767836}
   - {fileID: 210667243}
+  - {fileID: 1093767836}
+  - {fileID: 519420032}
