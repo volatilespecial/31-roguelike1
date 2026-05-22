@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fecfd70973f7cbf8b70d986d15bd95b, type: 3}
+  m_Name: SnowyForest
+  m_EditorClassIdentifier: Assembly-CSharp::BiomeData
+  biomeName: Snowy Forest
+  temperature: 0.1
+  humidity: 0.7
+  terrainProp:
+  - influence: 0.5
+    minValue: 0.4
+    corruptedType: 1
+    type: 1
+    generationType: 0
+  - influence: 0.5
+    minValue: 0.4
+    corruptedType: 2
+    type: 2
+    generationType: 0
+  - influence: 0.7
+    minValue: 0.99
+    corruptedType: 3
+    type: 3
+    generationType: 1
+  terrainTypes:
+  - corryptedType: 8
+    type: 8
+    layerCount: 1
+  - corryptedType: 3
+    type: 3
+    layerCount: 3
+  - corryptedType: 5
+    type: 5
+    layerCount: 0
+  maxHeight: 10

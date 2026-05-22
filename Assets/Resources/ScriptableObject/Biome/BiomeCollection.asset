@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeba2e9d4de49fdfa9b54da255224a83, type: 3}
+  m_Name: BiomeCollection
+  m_EditorClassIdentifier: Assembly-CSharp::BiomeCollection
+  biomes:
+  - {fileID: 11400000, guid: 498fbbf115487f24fa2b71a6b428af69, type: 2}
+  - {fileID: 11400000, guid: 6a49cdfd3ed8a65efa8d916e75a7845c, type: 2}
+  - {fileID: 11400000, guid: e09c2559c97691b9c93f3f344e6cf107, type: 2}
+  - {fileID: 11400000, guid: 29cf2b0cb4dd57112bd0224f48b3119b, type: 2}
+  - {fileID: 11400000, guid: e19d46cfc59c27fd29f3045c795aaff4, type: 2}
+  - {fileID: 11400000, guid: 5d3d6cf0787942b1c8b379b73ccfcf5b, type: 2}
+  - {fileID: 11400000, guid: 4253e3ba1ffbf3c3da16646e1262b0e5, type: 2}
+  - {fileID: 11400000, guid: e529bd508ae45cb6aba0e0fff3db6f2b, type: 2}
+  biomeBlendingFactor: 30
