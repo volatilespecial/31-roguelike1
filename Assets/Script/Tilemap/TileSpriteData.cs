@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TileData", menuName = "Tilemap/TileData")]
+[CreateAssetMenu(fileName = "TileData", menuName = "Scriptable Objects/Tilemap/TileData")]
 public class TileSpriteData : ScriptableObject
 {
-    public Roguelike.Tilemaps.TileType type;
+    public Roguelike.Tilemap.NTile.TileType type;
     public TileBorderDirectionSprite[] sprites;
 }
 

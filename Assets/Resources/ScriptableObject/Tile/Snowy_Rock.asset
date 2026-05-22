@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ef920239265ff13826c4ce9b950f95, type: 3}
+  m_Name: Snowy_Rock
+  m_EditorClassIdentifier: Assembly-CSharp::TileSpriteData
+  type: 9
+  sprites:
+  - spNSEW: {fileID: -865573928, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    sp: {fileID: 1449405795, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spW: {fileID: -352032507, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spN: {fileID: 214691340, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spS: {fileID: -2022840088, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spE: {fileID: 1038473795, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNW: {fileID: 881348466, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spSE: {fileID: 694290349, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNE: {fileID: 1549874728, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spSW: {fileID: 710277772, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNS: {fileID: 1189142651, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spEW: {fileID: 1868921078, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNSW: {fileID: 1119519112, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spSEW: {fileID: -2049789175, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNSE: {fileID: -1173737607, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
+    spNEW: {fileID: -645521499, guid: f9514d02dbf7945cfa404829e5ca7d76, type: 3}
