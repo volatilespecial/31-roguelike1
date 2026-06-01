@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b95557877d4df204389fcf29af9a9677, type: 3}
+  m_Name: BedRecipe
+  m_EditorClassIdentifier: Assembly-CSharp::CraftingRecipe
+  ingredients:
+  - {fileID: 11400000, guid: 4f9ea5fd0cd544744ac898d86f4155f9, type: 2}
+  - {fileID: 11400000, guid: 8f1c2f6d6e205e54192175ece857e24d, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  resultItem: {fileID: 11400000, guid: 13621bd5fda04c045887aacca5069474, type: 2}
+  resultCount: 1

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 using Roguelike.Utils;
-using Roguelike.Tilemaps;
+using Roguelike.Tilemap;
 
 public class PlayerMovement : MonoBehaviour
 {
