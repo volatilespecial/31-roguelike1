@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 06c68c1806f6f5a43befe5f532cc355b
+guid: f0149c9e9b9b9d44782e0f7ac688f49f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5030425972175329164
-    second: Inventaire_0
+      213: 3522992714559724913
+    second: helmet_icon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Inventaire_0
+      name: helmet_icon_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 306
-        height: 108
+        x: 29
+        y: 39
+        width: 102
+        height: 92
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c87d864f4c9afc540800000000000000
-      internalID: 5030425972175329164
+      spriteID: 17d1f91553f24e030800000000000000
+      internalID: 3522992714559724913
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Inventaire_0: 5030425972175329164
+      helmet_icon_0: 3522992714559724913
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

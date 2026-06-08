@@ -1,19 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using Roguelike.Tilemap.NProp;
-using Roguelike.Tilemap.NTile;
 using UnityEngine;
-
-
+using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(menuName = "Scriptable object/Item")]
 public class Item : ScriptableObject
 {
     [Header("Only gameplay")]
-    public TileType tile;
-    public PropType prop;
+    public TileBase tile;
     public ItemType type;
     public ActionType actionType;
+    public EquipmentType equipmentType;
     public Vector2Int range = new Vector2Int(5, 4);
 
     [Header("Only UI")]
@@ -39,4 +36,15 @@ public enum ActionType
     Cut,
     Attack,
     Defense
+}
+
+public enum EquipmentType
+{
+    None,
+    Helmet,
+    Chestplate,
+    Pants,
+    Boots,
+    Sword,
+    Axe
 }
