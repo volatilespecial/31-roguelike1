@@ -101,9 +101,7 @@ public class CraftingManager : MonoBehaviour
 
         GameObject newResultGo = Instantiate(inventoryItemPrefab, resultSlot.transform);
         InventoryItem resultItem = newResultGo.GetComponent<InventoryItem>();
-        resultItem.InitialiseItem(recipe.resultItem);
-        resultItem.count = recipe.resultCount;
-        resultItem.RefreshCount();
+        resultItem.InitialiseItem(recipe.resultItem, recipe.resultCount);
     }
 
     private void ClearResult()
@@ -125,26 +123,15 @@ public class CraftingManager : MonoBehaviour
         int itemsToCraft = resultItem.count;
         bool successfullyAddedAny = false;
 
-        for (int i = 0; i < itemsToCraft; i++)
-        {
-            if (inventoryManager.AddItem(resultItem.item))
-            {
-                successfullyAddedAny = true;
-            }
-            else
-            {
-                if (i == 0)
-                {
-                    Debug.LogWarning("Inventory full");
-                    return;
-                }
-                break;
-            }
-        }
+        successfullyAddedAny = inventoryManager.AddItem(resultItem.item, itemsToCraft);
 
         if (successfullyAddedAny)
         {
             ConsumeIngredients();
+        }
+        else
+        {
+            Debug.Log("Inventory is Full");
         }
     }
 
