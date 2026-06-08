@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -20,7 +21,13 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void InitialiseItem(Item newItem)
     {
+        InitialiseItem(newItem, 1);
+    }
+
+    public void InitialiseItem(Item newItem, int count)
+    {
         item = newItem;
+        this.count = count;
         if (image == null)
         {
             image = GetComponent<Image>();

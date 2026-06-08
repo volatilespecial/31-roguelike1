@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Roguelike.Tilemap.NProp;
+using Roguelike.Tilemap.NTile;
 using UnityEngine;
-using UnityEngine.Tilemaps;
+
+
 
 [CreateAssetMenu(menuName = "Scriptable object/Item")]
 public class Item : ScriptableObject
 {
     [Header("Only gameplay")]
-    public TileBase tile;
+    public TileType tile;
+    public PropType prop;
     public ItemType type;
     public ActionType actionType;
     public Vector2Int range = new Vector2Int(5, 4);

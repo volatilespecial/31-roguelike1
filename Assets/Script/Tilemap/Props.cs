@@ -22,7 +22,7 @@ namespace Roguelike.Tilemap.NProp{
         public PropType type;
         public Vector2Int size = new Vector2Int(1, 1);
         public bool isPlacedByPlayer; // To differenciate from decorative placed props
-        // TODO LootTable : Expected loot when breaked;
+        public LootTable lootTable = new LootTable();
         // TODO Configuration to break
 
         void OnValidate()
@@ -115,6 +115,7 @@ namespace Roguelike.Tilemap.NProp{
             get => _propsData.isPlacedByPlayer; 
             set => _propsData.isPlacedByPlayer = value;
         }
+        public LootTable LootTable { get => _propsData.lootTable; }
     }
 
 #region PropType

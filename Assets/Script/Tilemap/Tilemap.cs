@@ -54,8 +54,8 @@ namespace Roguelike.Tilemap{
                                 if (_tiles[index].gameObject != null) _tiles[index].Destroy();
                                 continue;  
                             }
-                            if (_tiles[index].gameObject != null) continue;
                             Tile tile = _tiles[index];
+                            if (_tiles[index].gameObject != null) continue;
                             GenerateTile(tile);
                         }
                         else
@@ -69,6 +69,17 @@ namespace Roguelike.Tilemap{
                 }
             }
             generated = true;
+        }
+
+        public bool ContainObject(Vector3Int position, bool isLocalPos = true)
+        {
+            Vector3Int local = position;
+            if (!isLocalPos)
+                local = Coordinate.IsoToChunkLocalPosition(position); 
+            if (!Chunk.IsInBound(local)) return true;
+            int index = _arrangement[Chunk.LocalToIndex(local)];
+            if (index == 0) return false;
+            return true;
         }
 
         public Tile GetTile(Vector3Int position, bool isLocalPos = true)
@@ -106,7 +117,7 @@ namespace Roguelike.Tilemap{
             _arrangement[index] = (int)index + 1;
             if (generated && isVisible(local)) {
                 GenerateTile(tile);
-                UpdateNeighborTile(local);
+                UpdateTile(tile);
             }
             _tiles[(uint)_arrangement[index]] = tile; 
             return 0;
@@ -252,6 +263,71 @@ namespace Roguelike.Tilemap{
                 _gProps.Remove(prop.gameObject);   
             prop.Destroy();
         }
+
+
+        private void UpdateTile(Tile tile)
+        {
+            Vector3Int tilePos = Coordinate.IsoToChunkLocalPosition(tile.position);
+            Vector3Int[] flagOffsets =
+            {
+                new Vector3Int( 1,  0,  0),
+                new Vector3Int(-1,  0,  0),
+                new Vector3Int( 0,  1,  0),
+                new Vector3Int( 0, -1,  0),
+            };
+
+            TileFlagBorderDirection[] flags =
+            {
+                TileFlagBorderDirection.E,
+                TileFlagBorderDirection.W,
+                TileFlagBorderDirection.N,
+                TileFlagBorderDirection.S,
+            };
+
+            TileFlagBorderDirection[] flagMasks =
+            {
+                TileFlagBorderDirection.NSE,
+                TileFlagBorderDirection.NSW,
+                TileFlagBorderDirection.NEW,
+                TileFlagBorderDirection.SEW,
+            };
+
+            
+            TileFlagBorderDirection tileFlags = 0;
+            for (int j = 0; j < flagOffsets.Length; ++j)
+            {
+                Vector3Int offPos = tilePos + flagOffsets[j];
+                if (Chunk.IsInBound(offPos))
+                {
+                    Tile offTile = GetTile(offPos); 
+                    if (offTile == null)
+                    {
+                        tileFlags |= flags[j];
+                    }
+                    else
+                    {
+                        offTile.SetTileBorderDirection(offTile.Flag & flagMasks[j]);
+                    }
+                }
+
+                else
+                {
+                    Chunk neighborChunk = WorldGenerator.singleton.GetChunk(position + flagOffsets[j]);
+                    if (neighborChunk == null) continue;
+                    Tile offTile = neighborChunk.tilemap.GetTile(Coordinate.IsoToChunkLocalPosition(offPos));
+                    if (offTile == null)
+                    {
+                        tileFlags |= flags[j];
+                    }
+                    else
+                    {
+                        offTile.SetTileBorderDirection(offTile.Flag & flagMasks[j]);
+                    }
+                }
+            }
+            tile.SetTileBorderDirection(tileFlags);
+        }
+
 
         private void UpdateNeighborTile(Vector3Int tilePos)
         {

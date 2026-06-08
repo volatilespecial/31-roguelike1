@@ -26,6 +26,8 @@ namespace Roguelike.Tilemap.NTile
         public int variation;
         public TileFlagBorderDirection flag;
 
+        public LootTable lootTable = new LootTable();
+
         public TileData(Sprite sprite, TileType type, int variation, TileFlagBorderDirection flag = 0)
         {
             this.sprite     = sprite;
@@ -157,6 +159,7 @@ namespace Roguelike.Tilemap.NTile
         public TileType Type { get => _tileData.type; }
         public int Variation { get => _tileData.variation; }
         public TileFlagBorderDirection Flag { get => _tileData.flag; }
+        public LootTable LootTable { get => _tileData.lootTable; }
     }
 
 
@@ -195,28 +198,28 @@ namespace Roguelike.Tilemap.NTile
     public class Snow : Tile
     {
         public Snow(Vector3Int position, int variation) 
-            : base(position, new TileData(_sprites[TileType.ROCK][variation].sp, TileType.SNOW, variation)) 
+            : base(position, new TileData(_sprites[TileType.SNOW][variation].sp, TileType.SNOW, variation)) 
         { }
     }
     
     public class SnowyDirt : Tile
     {
         public SnowyDirt(Vector3Int position, int variation) 
-            : base(position, new TileData(_sprites[TileType.ROCK][variation].sp, TileType.SNOWY_DIRT, variation)) 
+            : base(position, new TileData(_sprites[TileType.SNOWY_DIRT][variation].sp, TileType.SNOWY_DIRT, variation)) 
         { }
     }
 
     public class SnowyGrass : Tile
     {
         public SnowyGrass(Vector3Int position, int variation) 
-            : base(position, new TileData(_sprites[TileType.ROCK][variation].sp, TileType.SNOWY_GRASS, variation)) 
+            : base(position, new TileData(_sprites[TileType.SNOWY_GRASS][variation].sp, TileType.SNOWY_GRASS, variation)) 
         { }
     }
 
     public class SnowyRock : Tile
     {
         public SnowyRock(Vector3Int position, int variation) 
-            : base(position, new TileData(_sprites[TileType.ROCK][variation].sp, TileType.SNOWY_ROCK, variation)) 
+            : base(position, new TileData(_sprites[TileType.SNOWY_ROCK][variation].sp, TileType.SNOWY_ROCK, variation)) 
         { }
     }
 
